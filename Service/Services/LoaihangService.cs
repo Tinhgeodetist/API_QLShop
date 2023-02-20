@@ -27,9 +27,9 @@ namespace Service.Services
         {
             try
             {
-                var loaihangId = entity.Id;
+                
                 var SP = _context.Sanphams
-                                   .FirstOrDefault(x => x.LoaiHangId.Equals(loaihangId));
+                                   .FirstOrDefault(x => x.LoaiHangId.Equals(entity.Id));
                 if (SP != null) return false;
                 base.Xoa(entity);
                 return true;

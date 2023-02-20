@@ -8,9 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API_QLShop.Auth;
 
 namespace DoAn_CSC_API.Controllers
 {
+    [APIAuthorization]
     [Route("api/[controller]")]
     [ApiController]
     public class SanPhamController : ControllerBase
@@ -49,7 +51,7 @@ namespace DoAn_CSC_API.Controllers
                 GiamGia = x.GiamGia,
                 GiaSanPham = x.GiaSanPham,
                 HinhSanPham = x.HinhSanPham,
-                KhuyenMaiId = x.KhuyenMaiId,
+                KhuyenMaiId = (int)x.KhuyenMaiId,
                 KhuyenMai = new KhuyenmaiModel.KhuyenMaiBase
                 {
                     Id = x.KhuyenMai.Id,
@@ -71,7 +73,7 @@ namespace DoAn_CSC_API.Controllers
                     Id = x.ThuongHieu.Id,
                     TenThuongHieu = x.ThuongHieu.TenThuongHieu
                 },
-                TrangThai = x.TrangThai,
+                TrangThai = (bool)x.TrangThai,
                 UserId = x.UserId,
 
             }).ToList();
@@ -114,7 +116,7 @@ namespace DoAn_CSC_API.Controllers
                 GiamGia= x.GiamGia,
                 GiaSanPham = x.GiaSanPham,
                 HinhSanPham = x.HinhSanPham,
-                KhuyenMaiId = x.KhuyenMaiId,
+                KhuyenMaiId = (int)x.KhuyenMaiId,
                 KhuyenMai = new KhuyenmaiModel.KhuyenMaiBase
                 {
                     Id = x.KhuyenMai.Id,
@@ -137,7 +139,7 @@ namespace DoAn_CSC_API.Controllers
                     Id = x.ThuongHieu.Id,
                     TenThuongHieu = x.ThuongHieu.TenThuongHieu
                 },
-                TrangThai = x.TrangThai,
+                TrangThai = (bool)x.TrangThai,
                 UserId = x.UserId,
                 
             }).ToList();
@@ -186,7 +188,7 @@ namespace DoAn_CSC_API.Controllers
                 GiamGia = x.GiamGia,
                 GiaSanPham = x.GiaSanPham,
                 HinhSanPham = x.HinhSanPham,
-                KhuyenMaiId = x.KhuyenMaiId,
+                KhuyenMaiId = (int)x.KhuyenMaiId,
                 KhuyenMai = new KhuyenmaiModel.KhuyenMaiBase
                 {
                     Id = x.KhuyenMai.Id,
@@ -209,7 +211,7 @@ namespace DoAn_CSC_API.Controllers
                     Id = x.ThuongHieu.Id,
                     TenThuongHieu = x.ThuongHieu.TenThuongHieu
                 },
-                TrangThai = x.TrangThai,
+                TrangThai = (bool)x.TrangThai,
                 UserId = x.UserId,
 
             }).ToList();
@@ -223,7 +225,7 @@ namespace DoAn_CSC_API.Controllers
         }
 
         [HttpPost("ThongTinSP")]
-        public SanPhamModel.Output.ThongTinSanPham THongTinSanPham(SanPhamModel.Input.DocThongTinSanPham input)
+        public SanPhamModel.Output.ThongTinSanPham ThongTinSanPham(SanPhamModel.Input.DocThongTinSanPham input)
         {
             SanPhamModel.Output.ThongTinSanPham thongTinSanPham = new SanPhamModel.Output.ThongTinSanPham();
             var SP = _iSanPhamService.DocThongTinSanPham(input.ID);
@@ -232,15 +234,17 @@ namespace DoAn_CSC_API.Controllers
                 thongTinSanPham = new();
                 Utilities.PropertyCopier<Service.Models.Sanpham, SanPhamModel.Output.ThongTinSanPham>.Copy(SP, thongTinSanPham);
                 thongTinSanPham.Id = SP.Id;
+                
                 thongTinSanPham.ThuongHieu = new ThuongHieuModel.ThuongHieuBase()
                 {
                     Id = SP.ThuongHieu.Id,
                     TenThuongHieu = SP.ThuongHieu.TenThuongHieu,
                 };
+                
                 thongTinSanPham.KhuyenMai = new KhuyenmaiModel.KhuyenMaiBase()
                 {
                     Id = SP.KhuyenMai.Id,
-                    NgayBatDau = SP .KhuyenMai.NgayBatDau,
+                    NgayBatDau = SP.KhuyenMai.NgayBatDau,
                     NgayKetThuc = SP.KhuyenMai.NgayKetThuc,
                     PhanTramGiam = SP.KhuyenMai.PhanTramGiam,
                     QuaTangKem = SP.KhuyenMai.QuaTangKem,

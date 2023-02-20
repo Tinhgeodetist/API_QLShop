@@ -18,10 +18,10 @@ namespace API_QLShop.DTO
         {
             public class ThongTinThuongHieu : ThuongHieuBase
             {
-                public List<SanPhamModel.SanPhamBase> DanhSachThuongHieu { get; set; }
+                public List<SanPhamModel.SanPhamBase> DanhSachSanPham { get; set; }
                 public ThongTinThuongHieu()
                 {
-                    DanhSachThuongHieu = new List<SanPhamModel.SanPhamBase>();
+                    DanhSachSanPham = new List<SanPhamModel.SanPhamBase>();
                 }
             }
         }

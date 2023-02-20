@@ -14,7 +14,7 @@ namespace API_QLShop.DTO
             public int? UserId { get; set; }
             public int ThuongHieuId { get; set; }
             public int LoaiHangId { get; set; }
-            public int? KhuyenMaiId { get; set; }
+            public int KhuyenMaiId { get; set; }
             public string MaSanPham { get; set; }
             public string TenSanPham { get; set; }
             public int GiaSanPham { get; set; }
@@ -24,8 +24,9 @@ namespace API_QLShop.DTO
             public double GiamGia { get; set; }
             public int SoLuong { get; set; }
             public string ThongTin { get; set; }
-            public bool? TrangThai { get; set; }
+            public bool TrangThai { get; set; }
             public int Gia { get; set; }
+            public bool KichHoat { get; set; }
 
         }
         public class Input
@@ -77,8 +78,7 @@ namespace API_QLShop.DTO
                 public LoaihangModel.LoaiHangBase LoaiHangSP { get; set; }
                 // cần gì thêm vô
                 public ThongTinSanPham()
-                {
-                    
+                {                    
                     ThuongHieu = new ThuongHieuModel.ThuongHieuBase();
                     KhuyenMai = new KhuyenmaiModel.KhuyenMaiBase();
                     LoaiHangSP = new LoaihangModel.LoaiHangBase();

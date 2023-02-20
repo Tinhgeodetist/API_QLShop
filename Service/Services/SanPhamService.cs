@@ -16,7 +16,7 @@ namespace Service.Services
 
         public Sanpham DocThongTinSanPham(int id)
         {
-            var model = _context.Sanphams.FirstOrDefault(x => x.Id.Equals(id));
+            var model = DocTheoDieuKien(x => x.Id.Equals(id), x => x.ThuongHieu).FirstOrDefault();
             return model;
         }
         public List<Sanpham> DocDanhSachSanPham()
@@ -78,6 +78,20 @@ namespace Service.Services
             if (CurrentPage > pageCount) CurrentPage = pageCount;
             dsSPTheoThuongHieu = dsSPTheoThuongHieu.Skip((CurrentPage - 1) * pageSize).Take(pageSize).ToList();
             return dsSPTheoThuongHieu;
+        }
+        public new bool Xoa(Sanpham entity)
+        {
+            try
+            {
+                var chucnang = _context.Chucnangs.FirstOrDefault(x => x.SanPhamId.Equals(entity.Id));
+                if (chucnang != null) return false;
+                base.Xoa(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

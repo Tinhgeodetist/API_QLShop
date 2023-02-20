@@ -17,6 +17,25 @@ namespace Service.Services
             var dsThuongHieu = DocDanhSach().ToList();
             return dsThuongHieu;
         }
-       
+        public Thuonghieu DocThongTinThuongHieu(int id)
+        {
+            var xepHang = DocTheoDieuKien(x => x.Id.Equals(id)).FirstOrDefault();
+            return xepHang;
+        }
+
+        public new bool Xoa(Thuonghieu entity)
+        {
+            try
+            {
+                var phim = _context.Thuonghieus.FirstOrDefault(x => x.Id.Equals(entity.Id));
+                if (phim != null) return false;
+                base.Xoa(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
